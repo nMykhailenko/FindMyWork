@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3A3EA34C-1808-4C44-A14F-14177084314F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{BDB8691A-3627-4614-815E-86534195E37E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{7BF70FAC-22A2-4A27-986C-0D101CE97B76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{83624C87-7656-4F21-931F-07FD10A3AAE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{5EA7EF88-BD62-423E-A870-B3A214F45D1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Users.Api", "src\modules\users\FindMyWork.Modules.Users.Api\FindMyWork.Modules.Users.Api.csproj", "{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Users.Core", "src\modules\users\FindMyWork.Modules.Users.Core\FindMyWork.Modules.Users.Core.csproj", "{5E9A1002-C763-4245-8C7B-A97860C6CFAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BDB8691A-3627-4614-815E-86534195E37E} = {3A3EA34C-1808-4C44-A14F-14177084314F}
+		{7BF70FAC-22A2-4A27-986C-0D101CE97B76} = {3A3EA34C-1808-4C44-A14F-14177084314F}
+		{83624C87-7656-4F21-931F-07FD10A3AAE1} = {3A3EA34C-1808-4C44-A14F-14177084314F}
+		{5EA7EF88-BD62-423E-A870-B3A214F45D1F} = {7BF70FAC-22A2-4A27-986C-0D101CE97B76}
+		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C} = {5EA7EF88-BD62-423E-A870-B3A214F45D1F}
+		{5E9A1002-C763-4245-8C7B-A97860C6CFAE} = {5EA7EF88-BD62-423E-A870-B3A214F45D1F}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E9A1002-C763-4245-8C7B-A97860C6CFAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9A1002-C763-4245-8C7B-A97860C6CFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9A1002-C763-4245-8C7B-A97860C6CFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9A1002-C763-4245-8C7B-A97860C6CFAE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
