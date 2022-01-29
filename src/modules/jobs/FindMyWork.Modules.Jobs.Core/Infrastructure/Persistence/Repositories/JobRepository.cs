@@ -21,8 +21,10 @@ public class JobRepository : Repository, IJobRepository
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public Task<Job> AddAsync(Job job, CancellationToken cancellationToken)
+    public async Task<Job> AddAsync(Job job, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await DbContext.Jobs.AddAsync(job, cancellationToken);
+        
+        return job;
     }
 }

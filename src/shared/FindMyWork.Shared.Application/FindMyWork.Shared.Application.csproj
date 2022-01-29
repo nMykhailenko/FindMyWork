@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Models\RequestModels" />
-      <Folder Include="Models\ResponseModels" />
     </ItemGroup>
 
 </Project>
