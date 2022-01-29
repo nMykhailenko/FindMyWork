@@ -7,11 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\shared\FindMyWork.Shared.Application\FindMyWork.Shared.Application.csproj" />
       <ProjectReference Include="..\..\..\shared\FindMyWork.Shared.Infrastructure\FindMyWork.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\Common" />
+      <PackageReference Include="AutoMapper" Version="11.0.0" />
+      <PackageReference Include="OneOf" Version="3.0.205" />
     </ItemGroup>
 
 </Project>
