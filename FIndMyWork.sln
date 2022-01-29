@@ -8,11 +8,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{7BF7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{83624C87-7656-4F21-931F-07FD10A3AAE1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{5EA7EF88-BD62-423E-A870-B3A214F45D1F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{5EA7EF88-BD62-423E-A870-B3A214F45D1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Users.Api", "src\modules\users\FindMyWork.Modules.Users.Api\FindMyWork.Modules.Users.Api.csproj", "{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Identity.Api", "src\modules\identity\FindMyWork.Modules.Identity.Api\FindMyWork.Modules.Identity.Api.csproj", "{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Users.Core", "src\modules\users\FindMyWork.Modules.Users.Core\FindMyWork.Modules.Users.Core.csproj", "{5E9A1002-C763-4245-8C7B-A97860C6CFAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Identity.Core", "src\modules\identity\FindMyWork.Modules.Identity.Core\FindMyWork.Modules.Identity.Core.csproj", "{5E9A1002-C763-4245-8C7B-A97860C6CFAE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "jobs", "jobs", "{9F0669DF-767B-404D-A24A-268A25499D6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIndMyWork.Modules.Jobs.Api", "src\modules\jobs\FIndMyWork.Modules.Jobs.Api\FIndMyWork.Modules.Jobs.Api.csproj", "{AE048811-043C-4D28-96A9-15C76FE67C39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Jobs.Core", "src\modules\jobs\FindMyWork.Modules.Jobs.Core\FindMyWork.Modules.Jobs.Core.csproj", "{B1CA3FF9-7496-4827-9EB0-BB5E28ECCCB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +32,9 @@ Global
 		{5EA7EF88-BD62-423E-A870-B3A214F45D1F} = {7BF70FAC-22A2-4A27-986C-0D101CE97B76}
 		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C} = {5EA7EF88-BD62-423E-A870-B3A214F45D1F}
 		{5E9A1002-C763-4245-8C7B-A97860C6CFAE} = {5EA7EF88-BD62-423E-A870-B3A214F45D1F}
+		{9F0669DF-767B-404D-A24A-268A25499D6C} = {7BF70FAC-22A2-4A27-986C-0D101CE97B76}
+		{AE048811-043C-4D28-96A9-15C76FE67C39} = {9F0669DF-767B-404D-A24A-268A25499D6C}
+		{B1CA3FF9-7496-4827-9EB0-BB5E28ECCCB4} = {9F0669DF-767B-404D-A24A-268A25499D6C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,5 +45,13 @@ Global
 		{5E9A1002-C763-4245-8C7B-A97860C6CFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E9A1002-C763-4245-8C7B-A97860C6CFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E9A1002-C763-4245-8C7B-A97860C6CFAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE048811-043C-4D28-96A9-15C76FE67C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE048811-043C-4D28-96A9-15C76FE67C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE048811-043C-4D28-96A9-15C76FE67C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE048811-043C-4D28-96A9-15C76FE67C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1CA3FF9-7496-4827-9EB0-BB5E28ECCCB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1CA3FF9-7496-4827-9EB0-BB5E28ECCCB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1CA3FF9-7496-4827-9EB0-BB5E28ECCCB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1CA3FF9-7496-4827-9EB0-BB5E28ECCCB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
