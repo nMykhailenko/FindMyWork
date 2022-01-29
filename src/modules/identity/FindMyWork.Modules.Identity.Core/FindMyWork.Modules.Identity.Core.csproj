@@ -9,7 +9,10 @@
 
     <ItemGroup>
       <Folder Include="Application\Common" />
-      <Folder Include="Infrastructure" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\shared\FindMyWork.Shared.Infrastructure\FindMyWork.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
