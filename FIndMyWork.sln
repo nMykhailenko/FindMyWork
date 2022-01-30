@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Shared.Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Shared.Application", "src\shared\FindMyWork.Shared.Application\FindMyWork.Shared.Application.csproj", "{A512E4B6-648D-48E4-AE40-3A112C94A4BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modular.API", "src\FindMyWork.Modular.API\FindMyWork.Modular.API.csproj", "{92DD1271-7070-4E3D-B09D-B06716642FF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,7 @@ Global
 		{B1CA3FF9-7496-4827-9EB0-BB5E28ECCCB4} = {9F0669DF-767B-404D-A24A-268A25499D6C}
 		{4CCEE1FC-0381-4633-90F3-C5C765BFA6E8} = {83624C87-7656-4F21-931F-07FD10A3AAE1}
 		{A512E4B6-648D-48E4-AE40-3A112C94A4BC} = {83624C87-7656-4F21-931F-07FD10A3AAE1}
+		{92DD1271-7070-4E3D-B09D-B06716642FF4} = {BDB8691A-3627-4614-815E-86534195E37E}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -67,5 +70,9 @@ Global
 		{A512E4B6-648D-48E4-AE40-3A112C94A4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A512E4B6-648D-48E4-AE40-3A112C94A4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A512E4B6-648D-48E4-AE40-3A112C94A4BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92DD1271-7070-4E3D-B09D-B06716642FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92DD1271-7070-4E3D-B09D-B06716642FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92DD1271-7070-4E3D-B09D-B06716642FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92DD1271-7070-4E3D-B09D-B06716642FF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

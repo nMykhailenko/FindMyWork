@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence.Repositories;
 
-public class JobRepository : Repository, IJobRepository
+internal class JobRepository : Repository, IJobRepository
 {
     private ApplicationDbContext DbContext => (UnitOfWork as ApplicationDbContext)!;
     

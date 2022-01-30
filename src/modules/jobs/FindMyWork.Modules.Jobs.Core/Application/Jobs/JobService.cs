@@ -9,7 +9,7 @@ using FindMyWork.Shared.Application.Models.ErrorModels;
 
 namespace FindMyWork.Modules.Jobs.Core.Application.Jobs;
 
-public class JobService : IJobService
+internal class JobService : IJobService
 {
     private readonly IMapper _mapper;
     private readonly IJobRepository _jobRepository;
