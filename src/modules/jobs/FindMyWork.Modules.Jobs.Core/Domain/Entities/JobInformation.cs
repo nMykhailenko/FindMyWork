@@ -1,4 +1,6 @@
-﻿namespace FindMyWork.Modules.Jobs.Core.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FindMyWork.Modules.Jobs.Core.Domain.Entities;
 
 public class JobInformation
 {
@@ -17,6 +19,7 @@ public class JobInformation
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
     public DateTimeOffset? UpdatedAt { get; set; }
     
+    [ForeignKey("JobId")]
     public Guid JobId { get; set; }
     public Job Job { get; set; } = null!;
 

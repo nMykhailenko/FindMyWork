@@ -30,6 +30,8 @@ internal static class ServiceCollectionExtensions
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
             });    
         
+        services.AddSwaggerGen();
+        
         return services;
     }
 }

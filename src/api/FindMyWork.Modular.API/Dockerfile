@@ -5,10 +5,19 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/FindMyWork.Modular.API/FindMyWork.Modular.API.csproj", "FindMyWork.Modular.API/"]
-RUN dotnet restore "src/FindMyWork.Modular.API/FindMyWork.Modular.API.csproj"
+
+COPY ["api/FindMyWork.Modular.API/FindMyWork.Modular.API.csproj", "api/FindMyWork.Modular.API/"]
+
+COPY ["modules/jobs/FIndMyWork.Modules.Jobs.Api/FIndMyWork.Modules.Jobs.Api.csproj", "modules/jobs/FindMyWork.Modules.Jobs.Api/"]
+COPY ["modules/jobs/FindMyWork.Modules.Jobs.Core/FindMyWork.Modules.Jobs.Core.csproj", "modules/jobs/FindMyWork.Modules.Jobs.Core/"]
+
+COPY ["shared/FindMyWork.Shared.Application/FindMyWork.Shared.Application.csproj", "shared/FindMyWork.Shared.Application/"]
+COPY ["shared/FindMyWork.Shared.Infrastructure/FindMyWork.Shared.Infrastructure.csproj", "shared/FindMyWork.Shared.Infrastructure/"]
+
+RUN dotnet restore "api/FindMyWork.Modular.API/FindMyWork.Modular.API.csproj"
+
 COPY . .
-WORKDIR "/src/FindMyWork.Modular.API"
+WORKDIR "/src/api/FindMyWork.Modular.API"
 RUN dotnet build "FindMyWork.Modular.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\modules\jobs\FIndMyWork.Modules.Jobs.Api\FIndMyWork.Modules.Jobs.Api.csproj" />
+      <ProjectReference Include="..\..\shared\FindMyWork.Shared.Infrastructure\FindMyWork.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ public record JobResponse
 {
     public Guid Id { get; init; }
 
-    public string Status { get; init; }
+    public string Status { get; init; } = null!;
     
     public Guid? JobInformationId { get; init; }
     public JobInformationResponse? JobInformation { get; init; }

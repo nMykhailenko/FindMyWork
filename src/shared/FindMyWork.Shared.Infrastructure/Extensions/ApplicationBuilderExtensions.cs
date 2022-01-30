@@ -9,6 +9,9 @@ internal static class ApplicationBuilderExtensions
 {
     public static IApplicationBuilder UseSharedInfrastructure(this IApplicationBuilder app)
     {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        
         return app;
     }
 }
