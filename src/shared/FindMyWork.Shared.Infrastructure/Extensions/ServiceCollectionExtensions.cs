@@ -1,9 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Runtime.CompilerServices;
+using FindMyWork.Shared.Infrastructure.Controllers;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+
+[assembly:InternalsVisibleTo("FindMyWork.Modular.API")]
 namespace FindMyWork.Shared.Infrastructure.Extensions;
 
-public static class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
     public static T GetOptions<T>(this IServiceCollection services, string sectionName) where T : new()
     {
@@ -16,5 +20,16 @@ public static class ServiceCollectionExtensions
         section.Bind(options);
             
         return options;
+    }
+
+    public static IServiceCollection AddSharedInfrastructure(this IServiceCollection services)
+    {
+        services.AddControllers()
+            .ConfigureApplicationPartManager(manager =>
+            {
+                manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
+            });    
+        
+        return services;
     }
 }

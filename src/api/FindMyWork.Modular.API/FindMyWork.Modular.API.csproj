@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\modules\jobs\FIndMyWork.Modules.Jobs.Api\FIndMyWork.Modules.Jobs.Api.csproj" />
+      <ProjectReference Include="..\..\modules\jobs\FIndMyWork.Modules.Jobs.Api\FIndMyWork.Modules.Jobs.Api.csproj" />
     </ItemGroup>
 
 </Project>

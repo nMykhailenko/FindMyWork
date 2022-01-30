@@ -42,7 +42,7 @@ internal class JobService : IJobService
             Status = JobStatus.Draft,
             JobStatusInfos = new List<JobStatusInfo>
             {
-                new() {CurrentStatus = JobStatus.Draft, OldStatus = null, InitiatorId = employerId}
+                new() { CurrentStatus = JobStatus.Draft, OldStatus = null, InitiatorId = employerId }
             }
         };
 
