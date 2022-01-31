@@ -8,7 +8,7 @@ public class JobInformation
 
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public int QuantityToHire { get; set; }
+    public int NumberEmployeesToHire { get; set; }
     public decimal SalaryPerEmployee { get; set; }
     public double TotalHoursToWork { get; set; }
     public DateTimeOffset StartsOn { get; set; }
@@ -26,6 +26,9 @@ public class JobInformation
     public Guid LocationId { get; set; }
     public Address Location { get; set; } = null!;
     
+    public Guid CategoryId { get; set; }
+    public Category Category { get; set; } = null!;
+
     // TODO Contact Person should be Employer.
     public Guid ContactPersonId { get; set; }
 }

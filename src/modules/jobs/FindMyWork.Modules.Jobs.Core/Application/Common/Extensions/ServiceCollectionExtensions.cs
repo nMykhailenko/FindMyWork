@@ -6,6 +6,7 @@ using FindMyWork.Modules.Jobs.Core.Application.Jobs.Mappings;
 using FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence;
 using FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence.Repositories;
 using FindMyWork.Shared.Infrastructure.Database.Postgres;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("FindMyWork.Modules.Jobs.Api")]
@@ -19,6 +20,12 @@ internal static class ServiceCollectionExtensions
         services.AddScoped<IJobRepository, JobRepository>();
         services.AddScoped<IJobService, JobService>();
         services.AddPostgres<ApplicationDbContext>();
+
+        services.AddFluentValidation(fv =>
+        {
+            fv.RegisterValidatorsFromAssemblyContaining<ApplicationDbContext>();
+            fv.DisableDataAnnotationsValidation = true;
+        });
         
         return services;
     }

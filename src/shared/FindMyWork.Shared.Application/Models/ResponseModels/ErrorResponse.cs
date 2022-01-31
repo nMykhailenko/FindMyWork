@@ -1,8 +1,8 @@
 ﻿namespace FindMyWork.Shared.Application.Models.ResponseModels;
 
-public record ErrorResponseModel
+public record ErrorResponse
 {
-    public ErrorResponseModel(string code, string message)
+    public ErrorResponse(string code, string message)
     {
         Code = code;
         Message = message;

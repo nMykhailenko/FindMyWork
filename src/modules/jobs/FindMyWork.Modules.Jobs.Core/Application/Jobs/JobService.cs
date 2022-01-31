@@ -2,9 +2,9 @@
 using OneOf;
 using FindMyWork.Modules.Jobs.Core.Application.Common.Contracts.Database;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Contracts;
+using FindMyWork.Modules.Jobs.Core.Application.Jobs.Models.RequestModels;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Models.ResponseModels;
 using FindMyWork.Modules.Jobs.Core.Domain.Entities;
-using FindMyWork.Modules.Jobs.Core.Domain.Enums;
 using FindMyWork.Shared.Application.Models.ErrorModels;
 
 namespace FindMyWork.Modules.Jobs.Core.Application.Jobs;
@@ -34,19 +34,14 @@ internal class JobService : IJobService
         return response;
     }
 
-    public async Task<JobResponse> PostJobAsync(Guid employerId, CancellationToken cancellationToken)
+    public async Task<JobResponse> PostJobAsync(
+        Guid employerId, 
+        AddJobRequest request,
+        CancellationToken cancellationToken)
     {
-        var job = new Job
-        {
-            EmployerId = employerId,
-            Status = JobStatus.Draft,
-            JobStatusInfos = new List<JobStatusInfo>
-            {
-                new() { CurrentStatus = JobStatus.Draft, OldStatus = null, InitiatorId = employerId }
-            }
-        };
+        var jobToAdd = _mapper.Map<Job>((request, employerId));
 
-        var addedJob = await _jobRepository.AddAsync(job, cancellationToken);
+        var addedJob = await _jobRepository.AddAsync(jobToAdd, cancellationToken);
         await _jobRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
         var response = _mapper.Map<JobResponse>(addedJob);

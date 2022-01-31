@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using FindMyWork.Shared.Infrastructure.Controllers;
+using FindMyWork.Shared.Infrastructure.Validators;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,7 +29,9 @@ internal static class ServiceCollectionExtensions
             .ConfigureApplicationPartManager(manager =>
             {
                 manager.FeatureProviders.Add(new InternalControllerFeatureProvider());
-            });    
+            });
+        
+        services.AddTransient<IValidationFactory, ValidatorFactory>();
         
         services.AddSwaggerGen();
         
