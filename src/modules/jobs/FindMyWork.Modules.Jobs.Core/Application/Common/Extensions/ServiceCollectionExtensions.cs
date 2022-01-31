@@ -1,5 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
+using FindMyWork.Modules.Jobs.Core.Application.Common.Contracts;
 using FindMyWork.Modules.Jobs.Core.Application.Common.Contracts.Database;
+using FindMyWork.Modules.Jobs.Core.Application.Common.Utils;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Contracts;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Mappings;
@@ -7,6 +9,7 @@ using FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence;
 using FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence.Repositories;
 using FindMyWork.Shared.Infrastructure.Database.Postgres;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("FindMyWork.Modules.Jobs.Api")]
@@ -25,6 +28,16 @@ internal static class ServiceCollectionExtensions
         {
             fv.RegisterValidatorsFromAssemblyContaining<ApplicationDbContext>();
             fv.DisableDataAnnotationsValidation = true;
+        });
+        
+        services.AddHttpContextAccessor();
+        services.AddSingleton<IUriService>(o =>
+        {
+            var accessor = o.GetRequiredService<IHttpContextAccessor>();
+            var request = accessor.HttpContext?.Request;
+            var uri = string.Concat(request?.Scheme, "://", request?.Host.ToUriComponent());
+            
+            return new UriService(uri);
         });
         
         return services;

@@ -6,6 +6,7 @@ using FindMyWork.Modules.Jobs.Core.Application.Jobs.Models.RequestModels;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Models.ResponseModels;
 using FindMyWork.Modules.Jobs.Core.Domain.Entities;
 using FindMyWork.Shared.Application.Models.ErrorModels;
+using FindMyWork.Shared.Application.Models.ResponseModels;
 
 namespace FindMyWork.Modules.Jobs.Core.Application.Jobs;
 
@@ -13,13 +14,16 @@ internal class JobService : IJobService
 {
     private readonly IMapper _mapper;
     private readonly IJobRepository _jobRepository;
+    private readonly IPaginationHelper _paginationHelper;
 
     public JobService(
         IMapper mapper,
-        IJobRepository jobRepository)
+        IJobRepository jobRepository, 
+        IPaginationHelper paginationHelper)
     {
         _mapper = mapper;
         _jobRepository = jobRepository;
+        _paginationHelper = paginationHelper;
     }
 
     public async Task<OneOf<JobResponse, EntityNotFound>> GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -45,6 +49,26 @@ internal class JobService : IJobService
         await _jobRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
         var response = _mapper.Map<JobResponse>(addedJob);
+
+        return response;
+    }
+
+    public async Task<PaginatedResponse<IEnumerable<JobResponse>?>> GetByFilter(
+        int page, 
+        int take,
+        string route,
+        CancellationToken cancellationToken)
+    {
+        var jobs = await _jobRepository.GetPaginatedAsync(page, take, cancellationToken);
+        var totalCount = await _jobRepository.CountAsync(cancellationToken);
+
+        var jobsResponse = _mapper.Map<IList<JobResponse>>(jobs);
+        var response = _paginationHelper.CreatePagedResponse(
+            jobsResponse,
+            page,
+            take,
+            totalCount,
+            route);
 
         return response;
     }

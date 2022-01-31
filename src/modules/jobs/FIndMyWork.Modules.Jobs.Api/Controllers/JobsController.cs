@@ -43,6 +43,20 @@ public class JobsController : BaseController
             notFound => NotFound(new ErrorResponse(nameof(EntityNotFound), notFound.Message)));
     }
 
+    [HttpGet]
+    [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JobResponse))]   
+    public async Task<IActionResult> GetPaginatedAsync(
+        [FromQuery] int page = 1,
+        [FromQuery] int take = 20,
+        CancellationToken cancellationToken = default)
+    {
+        var route = Request.Path.Value;
+
+        var result = await _jobService.GetByFilter(page, take, route!, cancellationToken);
+        return Ok(result);
+    }
+
     /// <summary>
     /// Post job as draft.
     /// </summary>
@@ -66,6 +80,5 @@ public class JobsController : BaseController
         
         var response = await _jobService.PostJobAsync(employerId, request, cancellationToken);
         return Created($"api/v1.0/{JobsModule.ModulePath}/{response.Id}", response);
-
     }
 }
