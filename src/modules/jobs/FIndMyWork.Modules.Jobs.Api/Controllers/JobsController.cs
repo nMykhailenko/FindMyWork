@@ -15,14 +15,11 @@ namespace FIndMyWork.Modules.Jobs.Api.Controllers;
 public class JobsController : BaseController
 {
     private readonly IJobService _jobService;
-    private readonly IValidationFactory _validationFactory;
 
     public JobsController(
-        IJobService jobService, 
-        IValidationFactory validationFactory)
+        IJobService jobService)
     {
         _jobService = jobService;
-        _validationFactory = validationFactory;
     }
 
     /// <summary>
@@ -71,14 +68,9 @@ public class JobsController : BaseController
         [FromBody]AddJobRequest request,
         CancellationToken cancellationToken)
     {
-        var validationResult = await _validationFactory.ValidateAsync(request);
-
-        if (validationResult is not null)
-        {
-            return BadRequest(validationResult);
-        }
-        
-        var response = await _jobService.PostJobAsync(employerId, request, cancellationToken);
-        return Created($"api/v1.0/{JobsModule.ModulePath}/{response.Id}", response);
+        var result = await _jobService.PostJobAsync(employerId, request, cancellationToken);
+        return result.Match<IActionResult>(
+            success => Created($"api/v1.0/{JobsModule.ModulePath}/{success.Id}", success),
+            entityNotValid => BadRequest(new ErrorResponse(nameof(EntityNotValid), entityNotValid.Message)));
     }
 }

@@ -1,8 +1,10 @@
-﻿using FindMyWork.Shared.Application.Models.ResponseModels;
+﻿using OneOf;
+using FindMyWork.Shared.Application.Models.ErrorModels;
+using FindMyWork.Shared.Application.Models.SuccessModels;
 
 namespace FindMyWork.Shared.Infrastructure.Validators;
 
 public interface IValidationFactory
 {
-    Task<ErrorResponse?> ValidateAsync<TRequest>(TRequest request);
+    Task<OneOf<ValidationSuccess, EntityNotValid>> ValidateAsync<TRequest>(TRequest request);
 }

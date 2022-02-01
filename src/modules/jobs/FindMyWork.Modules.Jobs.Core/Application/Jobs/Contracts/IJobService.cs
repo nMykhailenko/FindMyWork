@@ -9,7 +9,7 @@ namespace FindMyWork.Modules.Jobs.Core.Application.Jobs.Contracts;
 public interface IJobService
 {
     Task<OneOf<JobResponse, EntityNotFound>> GetByIdAsync(Guid id, CancellationToken cancellationToken);
-    Task<JobResponse> PostJobAsync(
+    Task<OneOf<JobResponse, EntityNotValid>> PostJobAsync(
         Guid employerId, 
         AddJobRequest request,
         CancellationToken cancellationToken);

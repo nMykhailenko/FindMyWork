@@ -1,5 +1,8 @@
-﻿using System.Text.Json;
+﻿using OneOf;
+using System.Text.Json;
+using FindMyWork.Shared.Application.Models.ErrorModels;
 using FindMyWork.Shared.Application.Models.ResponseModels;
+using FindMyWork.Shared.Application.Models.SuccessModels;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,14 +18,14 @@ public class ValidatorFactory: IValidationFactory
         _serviceProvider = serviceProvider;
     }
 
-    public async Task<ErrorResponse?> ValidateAsync<TRequest>(TRequest request)
+    public async Task<OneOf<ValidationSuccess, EntityNotValid>> ValidateAsync<TRequest>(TRequest request)
     {
         var validator = _serviceProvider.GetRequiredService<IValidator<TRequest>>();
         
         var validationResult = await validator.ValidateAsync(request);
         if (validationResult.IsValid)
         {
-            return null;
+            return new ValidationSuccess();
         }
         
         var errors = validationResult.Errors
@@ -33,6 +36,6 @@ public class ValidatorFactory: IValidationFactory
             )
             .Select(x => new ValidationResponse(x.Key, string.Join(",", x.Value)));
 
-        return new ErrorResponse("EntityNotValid", JsonSerializer.Serialize(errors));
+        return new EntityNotValid(JsonSerializer.Serialize(errors));
     }
 }

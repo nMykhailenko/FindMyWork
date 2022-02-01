@@ -7,6 +7,7 @@ using FindMyWork.Modules.Jobs.Core.Application.Jobs.Models.ResponseModels;
 using FindMyWork.Modules.Jobs.Core.Domain.Entities;
 using FindMyWork.Shared.Application.Models.ErrorModels;
 using FindMyWork.Shared.Application.Models.ResponseModels;
+using FindMyWork.Shared.Infrastructure.Validators;
 
 namespace FindMyWork.Modules.Jobs.Core.Application.Jobs;
 
@@ -15,15 +16,18 @@ internal class JobService : IJobService
     private readonly IMapper _mapper;
     private readonly IJobRepository _jobRepository;
     private readonly IPaginationHelper _paginationHelper;
+    private readonly IValidationFactory _validationFactory;
 
     public JobService(
         IMapper mapper,
         IJobRepository jobRepository, 
-        IPaginationHelper paginationHelper)
+        IPaginationHelper paginationHelper, 
+        IValidationFactory validationFactory)
     {
         _mapper = mapper;
         _jobRepository = jobRepository;
         _paginationHelper = paginationHelper;
+        _validationFactory = validationFactory;
     }
 
     public async Task<OneOf<JobResponse, EntityNotFound>> GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -38,19 +42,24 @@ internal class JobService : IJobService
         return response;
     }
 
-    public async Task<JobResponse> PostJobAsync(
+    public async Task<OneOf<JobResponse, EntityNotValid>> PostJobAsync(
         Guid employerId, 
         AddJobRequest request,
         CancellationToken cancellationToken)
     {
-        var jobToAdd = _mapper.Map<Job>((request, employerId));
+        var validationResult = await _validationFactory.ValidateAsync(request);
+        return await validationResult.Match<Task<OneOf<JobResponse, EntityNotValid>>>(
+            async success =>
+            {
+                var jobToAdd = _mapper.Map<Job>((request, employerId));
 
-        var addedJob = await _jobRepository.AddAsync(jobToAdd, cancellationToken);
-        await _jobRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                var addedJob = await _jobRepository.AddAsync(jobToAdd, cancellationToken);
+                await _jobRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-        var response = _mapper.Map<JobResponse>(addedJob);
+                var response = _mapper.Map<JobResponse>(addedJob);
 
-        return response;
+                return response;
+            }, entityNotValid => Task.FromResult<OneOf<JobResponse, EntityNotValid>>(entityNotValid));
     }
 
     public async Task<PaginatedResponse<IEnumerable<JobResponse>?>> GetByFilter(
