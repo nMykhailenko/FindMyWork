@@ -44,13 +44,12 @@ public class JobsController : BaseController
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JobResponse))]   
     public async Task<IActionResult> GetPaginatedAsync(
-        [FromQuery] int page = 1,
-        [FromQuery] int take = 20,
+        [FromQuery]JobFilterRequest request,
         CancellationToken cancellationToken = default)
     {
         var route = Request.Path.Value;
 
-        var result = await _jobService.GetByFilter(page, take, route!, cancellationToken);
+        var result = await _jobService.GetByFilter(request, route!, cancellationToken);
         return Ok(result);
     }
 

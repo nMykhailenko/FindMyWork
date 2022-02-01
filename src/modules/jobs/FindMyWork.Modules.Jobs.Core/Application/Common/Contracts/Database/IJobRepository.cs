@@ -8,7 +8,7 @@ internal interface IJobRepository : IRepository
     Task<Job?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<Job> AddAsync(Job job, CancellationToken cancellationToken);
 
-    Task<IEnumerable<Job>> GetPaginatedAsync(int page, int take, CancellationToken cancellationToken);
+    Task<IEnumerable<Job>> GetPaginatedByCategoryAsync(Guid categoryId, int page, int take, CancellationToken cancellationToken);
 
-    Task<int> CountAsync(CancellationToken cancellationToken);
+    Task<int> CountByCategoryAsync(Guid categoryId, CancellationToken cancellationToken);
 }

@@ -15,8 +15,7 @@ public interface IJobService
         CancellationToken cancellationToken);
 
     Task<PaginatedResponse<IEnumerable<JobResponse>?>> GetByFilter(
-        int page,
-        int take,
+        JobFilterRequest request,
         string route,
         CancellationToken cancellationToken);
 }

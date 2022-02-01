@@ -29,19 +29,26 @@ internal class JobRepository : Repository, IJobRepository
         return job;
     }
 
-    public async Task<IEnumerable<Job>> GetPaginatedAsync(int page, int take, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Job>> GetPaginatedByCategoryAsync(
+        Guid categoryId,
+        int page, 
+        int take, 
+        CancellationToken cancellationToken)
     {
         return await DbContext.Jobs
             .Include(x => x.JobStatusInfos)
             .Include(x => x.JobInformation)
+            .Where(x => x.JobInformation.CategoryId == categoryId)
             .OrderBy(x => x.Id)
             .Skip((page - 1) * take)
             .Take(take)
             .ToListAsync(cancellationToken);
     }
 
-    public Task<int> CountAsync(CancellationToken cancellationToken)
+    public Task<int> CountByCategoryAsync(Guid categoryId, CancellationToken cancellationToken)
     {
-        return DbContext.Jobs.CountAsync(cancellationToken);
+        return DbContext.Jobs
+            .Where(x => x.JobInformation.CategoryId == categoryId)
+            .CountAsync(cancellationToken);
     }
 }

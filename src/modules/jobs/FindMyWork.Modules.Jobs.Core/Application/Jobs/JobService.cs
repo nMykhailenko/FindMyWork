@@ -63,19 +63,22 @@ internal class JobService : IJobService
     }
 
     public async Task<PaginatedResponse<IEnumerable<JobResponse>?>> GetByFilter(
-        int page, 
-        int take,
+        JobFilterRequest request,
         string route,
         CancellationToken cancellationToken)
     {
-        var jobs = await _jobRepository.GetPaginatedAsync(page, take, cancellationToken);
-        var totalCount = await _jobRepository.CountAsync(cancellationToken);
+        var jobs = await _jobRepository.GetPaginatedByCategoryAsync(
+            request.CategoryId,
+            request.Page, 
+            request.Take, 
+            cancellationToken);
+        var totalCount = await _jobRepository.CountByCategoryAsync(request.CategoryId, cancellationToken);
 
         var jobsResponse = _mapper.Map<IList<JobResponse>>(jobs);
         var response = _paginationHelper.CreatePagedResponse(
             jobsResponse,
-            page,
-            take,
+            request.Page,
+            request.Take,
             totalCount,
             route);
 
