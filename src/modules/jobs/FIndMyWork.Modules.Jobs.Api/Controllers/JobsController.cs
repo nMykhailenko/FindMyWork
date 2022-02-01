@@ -4,7 +4,6 @@ using FindMyWork.Modules.Jobs.Core.Application.Jobs.Models.ResponseModels;
 using FindMyWork.Shared.Application.Models.ErrorModels;
 using FindMyWork.Shared.Application.Models.ResponseModels;
 using FindMyWork.Shared.Infrastructure.Controllers;
-using FindMyWork.Shared.Infrastructure.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -71,5 +70,26 @@ public class JobsController : BaseController
         return result.Match<IActionResult>(
             success => Created($"api/v1.0/{JobsModule.ModulePath}/{success.Id}", success),
             entityNotValid => BadRequest(new ErrorResponse(nameof(EntityNotValid), entityNotValid.Message)));
+    }
+
+    /// <summary>
+    /// Delete job. 
+    /// </summary>
+    /// <param name="id">Job id.</param>
+    /// <param name="userId">User id.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    [HttpDelete("{id:guid}")]
+    [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorResponse))]
+    public async Task<IActionResult> Delete(
+        [FromRoute] Guid id,
+        [FromQuery] Guid userId,
+        CancellationToken cancellationToken)
+    {
+        var result = await _jobService.SoftDeleteAsync(id, userId, cancellationToken);
+        return result.Match<IActionResult>(
+            _ => Ok(),
+            notFound => NotFound(new ErrorResponse(nameof(EntityNotFound), notFound.Message)));
     }
 }

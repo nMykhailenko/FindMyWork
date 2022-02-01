@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Application\Common" />
+      <ProjectReference Include="..\..\..\shared\FindMyWork.Shared.Infrastructure\FindMyWork.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\shared\FindMyWork.Shared.Infrastructure\FindMyWork.Shared.Infrastructure.csproj" />
+      <Folder Include="Domain\Enums" />
     </ItemGroup>
 
 </Project>

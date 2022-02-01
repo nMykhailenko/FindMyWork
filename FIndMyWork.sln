@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{7BF7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{83624C87-7656-4F21-931F-07FD10A3AAE1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{5EA7EF88-BD62-423E-A870-B3A214F45D1F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{5EA7EF88-BD62-423E-A870-B3A214F45D1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Identity.Api", "src\modules\identity\FindMyWork.Modules.Identity.Api\FindMyWork.Modules.Identity.Api.csproj", "{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}"
 EndProject
@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unitTests", "unitTests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{A5893449-216F-4260-98D7-E364098224CD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{1F99737D-07BC-4E8E-B998-F248D8C0CC0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,7 @@ Global
 		{92DD1271-7070-4E3D-B09D-B06716642FF4} = {BDB8691A-3627-4614-815E-86534195E37E}
 		{749CE399-06E5-49DF-A5C9-C423A1478A85} = {21CAF455-CD7D-49A2-9B7B-90149F411864}
 		{A5893449-216F-4260-98D7-E364098224CD} = {749CE399-06E5-49DF-A5C9-C423A1478A85}
+		{1F99737D-07BC-4E8E-B998-F248D8C0CC0C} = {7BF70FAC-22A2-4A27-986C-0D101CE97B76}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

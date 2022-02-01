@@ -7,7 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Models\RequestModels" />
+      <PackageReference Include="Azure.Storage.Blobs" Version="12.10.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.13" />
     </ItemGroup>
 
 </Project>

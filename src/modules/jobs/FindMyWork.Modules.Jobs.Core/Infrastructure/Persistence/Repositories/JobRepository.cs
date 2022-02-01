@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FindMyWork.Modules.Jobs.Core.Application.Common.Contracts.Database;
+﻿using FindMyWork.Modules.Jobs.Core.Application.Common.Contracts.Database;
 using FindMyWork.Modules.Jobs.Core.Domain.Entities;
 using FindMyWork.Shared.Infrastructure.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +37,7 @@ internal class JobRepository : Repository, IJobRepository
         return await DbContext.Jobs
             .Include(x => x.JobStatusInfos)
             .Include(x => x.JobInformation)
-            .Where(x => x.JobInformation.CategoryId == categoryId)
+            .Where(x => x.Deleted == null && x.JobInformation.CategoryId == categoryId)
             .OrderBy(x => x.Id)
             .Skip((page - 1) * take)
             .Take(take)
@@ -50,5 +49,10 @@ internal class JobRepository : Repository, IJobRepository
         return DbContext.Jobs
             .Where(x => x.JobInformation.CategoryId == categoryId)
             .CountAsync(cancellationToken);
+    }
+
+    public void Update(Job job)
+    {
+        DbContext.Jobs.Update(job);
     }
 }

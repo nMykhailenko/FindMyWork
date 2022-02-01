@@ -5,8 +5,10 @@ using FindMyWork.Modules.Jobs.Core.Application.Jobs.Contracts;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Models.RequestModels;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Models.ResponseModels;
 using FindMyWork.Modules.Jobs.Core.Domain.Entities;
+using FindMyWork.Modules.Jobs.Core.Domain.Enums;
 using FindMyWork.Shared.Application.Models.ErrorModels;
 using FindMyWork.Shared.Application.Models.ResponseModels;
+using FindMyWork.Shared.Application.Models.SuccessModels;
 using FindMyWork.Shared.Infrastructure.Validators;
 
 namespace FindMyWork.Modules.Jobs.Core.Application.Jobs;
@@ -83,5 +85,40 @@ internal class JobService : IJobService
             route);
 
         return response;
+    }
+
+    public async Task<OneOf<OperationSuccess, EntityNotFound>> SoftDeleteAsync(
+        Guid id, 
+        Guid userId,
+        CancellationToken cancellationToken)
+    {
+        var job = await _jobRepository.GetByIdAsync(id, cancellationToken);
+        if (job is null)
+        {
+            return new EntityNotFound($"Job with {id} not found");
+        }
+
+        var lastStatus = job.JobStatusInfos
+            .OrderBy(x => x.CreatedAt)
+            .Last();
+        
+        var jobStatusInfo = new JobStatusInfo
+        {
+            JobId = id,
+            CurrentStatus = JobStatus.Archived,
+            OldStatus = lastStatus.CurrentStatus,
+            InitiatorId = userId
+        };
+
+        job.Deleted = true;
+        job.JobInformation.Deleted = true;
+        job.Status = JobStatus.Archived;
+        
+        job.JobStatusInfos.Add(jobStatusInfo);
+
+        _jobRepository.Update(job);
+        await _jobRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+
+        return new OperationSuccess();
     }
 }

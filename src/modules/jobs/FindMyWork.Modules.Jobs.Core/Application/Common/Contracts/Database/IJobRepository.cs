@@ -11,4 +11,5 @@ internal interface IJobRepository : IRepository
     Task<IEnumerable<Job>> GetPaginatedByCategoryAsync(Guid categoryId, int page, int take, CancellationToken cancellationToken);
 
     Task<int> CountByCategoryAsync(Guid categoryId, CancellationToken cancellationToken);
+    void Update(Job job);
 }

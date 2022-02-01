@@ -5,7 +5,7 @@ public enum JobStatus : byte
     None = 0,
     Draft = 1, 
     Created = 2,
-    Pending = 3,
+    Hiring = 3,
     Hired = 4,
     Active = 5,
     Canceled = 6,

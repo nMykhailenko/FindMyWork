@@ -1,5 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
+using Azure.Storage.Blobs;
+using FindMyWork.Shared.Application.Contracts;
+using FindMyWork.Shared.Application.Options;
 using FindMyWork.Shared.Infrastructure.Controllers;
+using FindMyWork.Shared.Infrastructure.Services.Storage;
+using FindMyWork.Shared.Infrastructure.Services.Storage.Factory;
 using FindMyWork.Shared.Infrastructure.Validators;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +37,11 @@ internal static class ServiceCollectionExtensions
             });
         
         services.AddTransient<IValidationFactory, ValidatorFactory>();
+
+        var blobStorageOption = services.GetOptions<StorageAccountOptions>(nameof(StorageAccountOptions));
+        services.AddScoped(_ => new BlobServiceClient(blobStorageOption.ConnectionString));
+        services.AddScoped<IBlobContainerNameFactory, BlobContainerNameFactory>();
+        services.AddScoped<IBlobStorageService, BlobStorageService>();
         
         services.AddSwaggerGen();
         
