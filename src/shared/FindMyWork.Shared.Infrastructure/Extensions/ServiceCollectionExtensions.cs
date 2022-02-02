@@ -42,7 +42,7 @@ internal static class ServiceCollectionExtensions
         services.AddScoped(_ => new BlobServiceClient(blobStorageOption.ConnectionString));
         services.AddScoped<IBlobContainerNameFactory, BlobContainerNameFactory>();
         services.AddScoped<IBlobStorageService, BlobStorageService>();
-        
+
         services.AddSwaggerGen();
         
         return services;
