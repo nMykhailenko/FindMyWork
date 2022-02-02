@@ -2,9 +2,6 @@
 
 public record PaginatedResponse<TResponse>
 {
-    public PaginatedResponse()
-    {
-    }
     public PaginatedResponse(
         TResponse? data, 
         int pageNumber, 
