@@ -1,7 +1,7 @@
 version: "3.6"
-# networks:
-#   find-my-work:
-#     driver: bridge
+networks:
+  find-my-work:
+    driver: bridge
 
 services:
     find-my-work-postgres-db:
@@ -14,27 +14,27 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
             - POSTGRES_DB=FindMyWork.Jobs
-    #     networks:
-    #         - find-my-work
+        networks:
+            - find-my-work
         volumes:
             - find-my-work-data:/var/lib/postgresql/data
                     
-    # find-my-work-api:
-    #     container_name: find-my-work-api
-    #     ports:
-    #         - 8010:80
-    #         - 8011:443
-    #     image: find-my-work-api:latest   
-    #     build:
-    #         context: ../src
-    #         dockerfile: api/FIndMyWork.Modular.API/Dockerfile
-    #     restart: on-failure
-    #     links: 
-    #         - find-my-work-postgres-db
-    #     depends_on:
-    #         - find-my-work-postgres-db
-    #     networks:
-    #         - find-my-work
+    find-my-work-api:
+        container_name: find-my-work-api
+        ports:
+            - 8010:80
+            - 8011:443
+        image: find-my-work-api:latest   
+        build:
+            context: ../src
+            dockerfile: api/FIndMyWork.Modular.API/Dockerfile
+        restart: on-failure
+        links: 
+            - find-my-work-postgres-db
+        depends_on:
+            - find-my-work-postgres-db
+        networks:
+            - find-my-work
 
 volumes:
     find-my-work-data:

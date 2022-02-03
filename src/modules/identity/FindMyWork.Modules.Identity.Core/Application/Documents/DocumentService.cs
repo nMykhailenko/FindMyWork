@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using OneOf;
 using FindMyWork.Modules.Users.Core.Application.Common.Contracts.Database;
 using FindMyWork.Modules.Users.Core.Application.Documents.Contracts;
 using FindMyWork.Modules.Users.Core.Application.Documents.Models.RequestModels;
+using FindMyWork.Modules.Users.Core.Application.Documents.Models.ResponseModels;
 using FindMyWork.Modules.Users.Core.Domain.Entities;
+using FindMyWork.Shared.Application.Models.ErrorModels;
 
 namespace FindMyWork.Modules.Users.Core.Application.Documents;
 
@@ -24,14 +27,14 @@ public class DocumentService : IDocumentService
         Guid userId, 
         CancellationToken cancellationToken)
     {
-        var document = _mapper.Map<Document>((request, userId));
+        var document = _mapper.Map<Document>(request);
 
         var addedDocument = await _documentRepository.AddAsync(document, cancellationToken);
 
         return true;
     }
 
-    public async Task<bool> AcceptDocumentAsync(
+    public async Task<OneOf<AcceptedDocumentResponse, EntityNotFound>> AcceptDocumentAsync(
         Guid documentId,
         Guid signerId,
         CancellationToken cancellationToken)
@@ -39,7 +42,7 @@ public class DocumentService : IDocumentService
         var acceptedDocument = await _documentRepository.GetAcceptedDocument(documentId, cancellationToken);
         if (acceptedDocument is null)
         {
-            return false;
+            return new EntityNotFound($"Document with id {documentId} not found");
         }
 
         acceptedDocument.Accepted = true;
@@ -49,6 +52,6 @@ public class DocumentService : IDocumentService
         acceptedDocument.UpdatedAt = DateTimeOffset.UtcNow;
         acceptedDocument.Document.UpdatedAt = DateTimeOffset.UtcNow;
 
-        return true;
+        return new AcceptedDocumentResponse();
     }
 }
