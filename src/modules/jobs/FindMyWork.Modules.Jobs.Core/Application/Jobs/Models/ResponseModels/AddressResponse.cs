@@ -2,7 +2,6 @@
 
 public record AddressResponse
 {
-    public Guid Id { get; init; }
     public string AddressLine { get; init; } = null!;
     public string City { get; init; } = null!;
     public string ZipCode { get; init; } = null!;

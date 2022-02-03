@@ -11,6 +11,8 @@ using FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence.Repositories;
 using FindMyWork.Shared.Infrastructure.Database.Postgres;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: InternalsVisibleTo("FindMyWork.Modules.Jobs.Api")]
@@ -32,6 +34,13 @@ internal static class ServiceCollectionExtensions
         {
             fv.RegisterValidatorsFromAssemblyContaining<ApplicationDbContext>();
             fv.DisableDataAnnotationsValidation = true;
+        });
+        
+        services.AddApiVersioning(options =>
+        {
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.ApiVersionReader = new UrlSegmentApiVersionReader();
         });
         
         services.AddHttpContextAccessor();
