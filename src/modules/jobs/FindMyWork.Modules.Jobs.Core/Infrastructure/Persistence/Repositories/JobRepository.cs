@@ -9,7 +9,7 @@ internal class JobRepository : Repository, IJobRepository
 {
     private ApplicationDbContext DbContext => (UnitOfWork as ApplicationDbContext)!;
     
-    public JobRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+    public JobRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
     }
 

@@ -4,6 +4,7 @@ using FindMyWork.Modules.Jobs.Core.Application.Common.Contracts.Database;
 using FindMyWork.Modules.Jobs.Core.Application.Common.Utils;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Contracts;
+using FindMyWork.Modules.Jobs.Core.Application.Jobs.Helpers;
 using FindMyWork.Modules.Jobs.Core.Application.Jobs.Mappings;
 using FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence;
 using FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence.Repositories;
@@ -22,6 +23,9 @@ internal static class ServiceCollectionExtensions
         services.AddAutoMapper(typeof(JobMappingProfile));
         services.AddScoped<IJobRepository, JobRepository>();
         services.AddScoped<IJobService, JobService>();
+        services.AddScoped<IPaginationHelper, PaginationHelper>();
+        
+        
         services.AddPostgres<ApplicationDbContext>();
 
         services.AddFluentValidation(fv =>

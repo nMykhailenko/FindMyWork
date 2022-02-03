@@ -2,7 +2,7 @@
 
 namespace FindMyWork.Shared.Infrastructure.Database.Repositories;
 
-class UnitOfWorkTransaction: IUnitOfWorkTransaction
+sealed class UnitOfWorkTransaction: IUnitOfWorkTransaction
 {
     private readonly IDbContextTransaction _dbContextTransaction;
     private bool _disposedValue;
@@ -19,7 +19,7 @@ class UnitOfWorkTransaction: IUnitOfWorkTransaction
         return _dbContextTransaction.DisposeAsync();
     }
 
-    protected virtual void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
         if (_disposedValue) return;
         

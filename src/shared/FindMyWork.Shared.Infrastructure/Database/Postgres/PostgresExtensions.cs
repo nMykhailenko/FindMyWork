@@ -20,9 +20,9 @@ public static class PostgresExtensions
         var options = services.GetOptions<PostgresOptions>("postgres");
         services.AddDbContext<T>(x => x.UseNpgsql(options.ConnectionString));
 
-        using var scope = services.BuildServiceProvider().CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<T>();
-        dbContext.Database.Migrate();
+        // using var scope = services.BuildServiceProvider().CreateScope();
+        // var dbContext = scope.ServiceProvider.GetRequiredService<T>();
+        // dbContext.Database.Migrate();
 
         return services;
     }
