@@ -7,17 +7,19 @@ namespace FindMyWork.Shared.Infrastructure.Database.Postgres;
 
 public static class PostgresExtensions
 {
-    internal static IServiceCollection AddPostgres(this IServiceCollection services)
+    internal static IServiceCollection AddPostgres(this IServiceCollection services, string sectionName)
     {
-        var options = services.GetOptions<PostgresOptions>("postgres");
+        var options = services.GetOptions<PostgresOptions>(sectionName);
         services.AddSingleton(options);
 
         return services;
     }
 
-    public static IServiceCollection AddPostgres<T>(this IServiceCollection services) where T : BaseDbContext
+    public static IServiceCollection AddPostgres<T>(
+        this IServiceCollection services,
+        string sectionName) where T : BaseDbContext
     {
-        var options = services.GetOptions<PostgresOptions>("postgres");
+        var options = services.GetOptions<PostgresOptions>(sectionName);
         services.AddDbContext<T>(x => x.UseNpgsql(options.ConnectionString));
 
         // using var scope = services.BuildServiceProvider().CreateScope();

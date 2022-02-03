@@ -15,4 +15,9 @@ public interface IBlobStorageService
         string fileName,
         DocumentType documentType,
         CancellationToken cancellationToken);
+
+    Task<OneOf<SuccessFileResponse, ErrorResponse>> GetFileAsync(
+        string fileName,
+        DocumentType documentType,
+        CancellationToken cancellationToken);
 }

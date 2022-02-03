@@ -80,4 +80,27 @@ public class BlobStorageService : IBlobStorageService
         
         return memoryStream.ToArray();
     }
+
+    public async Task<OneOf<SuccessFileResponse, ErrorResponse>> GetFileAsync(
+        string fileName,
+        DocumentType documentType,
+        CancellationToken cancellationToken)
+    {
+        var containerName = _blobContainerNameFactory
+            .Create(documentType)
+            .Get();
+
+        var blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
+        var blobClient = blobContainer.GetBlobClient(fileName);
+
+        if (await blobClient.ExistsAsync(cancellationToken))
+        {
+            return new SuccessFileResponse(blobClient.Uri.AbsolutePath, "token");
+        }
+
+        return new ErrorResponse(
+            "RetrieveBlobIssue",
+            $"Cannot get blob with name: {fileName} " +
+            $"from container {containerName}");
+    }
 }

@@ -20,6 +20,8 @@ namespace FindMyWork.Modules.Jobs.Core.Application.Common.Extensions;
 
 internal static class ServiceCollectionExtensions
 {
+    private const string JobDbOptionsSectionName = "JobDbOptions";
+    
     public static IServiceCollection AddCore(this IServiceCollection services)
     {
         services.AddAutoMapper(typeof(JobMappingProfile));
@@ -28,7 +30,7 @@ internal static class ServiceCollectionExtensions
         services.AddScoped<IPaginationHelper, PaginationHelper>();
         
         
-        services.AddPostgres<ApplicationDbContext>();
+        services.AddPostgres<ApplicationDbContext>(JobDbOptionsSectionName);
 
         services.AddFluentValidation(fv =>
         {
