@@ -113,6 +113,8 @@ internal class JobService : IJobService
         job.Deleted = true;
         job.JobInformation.Deleted = true;
         job.Status = JobStatus.Archived;
+        job.UpdatedAt = DateTimeOffset.UtcNow;
+        job.JobInformation.UpdatedAt = DateTimeOffset.UtcNow;
         
         job.JobStatusInfos.Add(jobStatusInfo);
 

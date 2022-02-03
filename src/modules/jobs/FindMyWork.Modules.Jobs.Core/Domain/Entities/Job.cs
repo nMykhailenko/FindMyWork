@@ -13,8 +13,8 @@ public class Job
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
     public DateTimeOffset? UpdatedAt { get; set; }
     
-    public JobInformation JobInformation { get; set; }
-    
+    public JobInformation JobInformation { get; set; } = null!;
+
     public Guid EmployerId { get; set; }
 
     public virtual ICollection<JobStatusInfo> JobStatusInfos { get; set; } = null!;
