@@ -3,14 +3,4 @@ using Microsoft.AspNetCore.Http;
 
 namespace FindMyWork.Shared.Application.Models.RequestModels;
 
-public record UploadFileRequest
-{
-    public UploadFileRequest(IFormFile file, DocumentType type)
-    {
-        File = file;
-        Type = type;
-    }
-
-    public IFormFile File { get; init; }
-    public DocumentType Type { get; set; }
-};
+public record UploadBlobRequest(IFormFile File, DocumentType Type);

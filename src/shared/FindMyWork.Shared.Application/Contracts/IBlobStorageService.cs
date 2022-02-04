@@ -7,8 +7,8 @@ namespace FindMyWork.Shared.Application.Contracts;
 
 public interface IBlobStorageService
 {
-    Task<OneOf<SuccessFileResponse, ErrorResponse>> UploadAsync(
-        UploadFileRequest request,
+    Task<OneOf<SuccessBlobResponse, ErrorResponse>> UploadAsync(
+        UploadBlobRequest request,
         CancellationToken cancellationToken);
 
     Task<OneOf<byte[], ErrorResponse>> DownloadFileAsync(
@@ -16,7 +16,7 @@ public interface IBlobStorageService
         DocumentType documentType,
         CancellationToken cancellationToken);
 
-    Task<OneOf<SuccessFileResponse, ErrorResponse>> GetFileAsync(
+    Task<OneOf<SuccessBlobResponse, ErrorResponse>> GetFileAsync(
         string fileName,
         DocumentType documentType,
         CancellationToken cancellationToken);

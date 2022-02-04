@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{A589
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "files", "files", "{1F99737D-07BC-4E8E-B998-F248D8C0CC0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Files.Core", "src\modules\files\FindMyWork.Modules.Files.Core\FindMyWork.Modules.Files.Core.csproj", "{63AD5A6B-44B9-49A6-BE33-452EFE8AFF6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,7 @@ Global
 		{749CE399-06E5-49DF-A5C9-C423A1478A85} = {21CAF455-CD7D-49A2-9B7B-90149F411864}
 		{A5893449-216F-4260-98D7-E364098224CD} = {749CE399-06E5-49DF-A5C9-C423A1478A85}
 		{1F99737D-07BC-4E8E-B998-F248D8C0CC0C} = {7BF70FAC-22A2-4A27-986C-0D101CE97B76}
+		{63AD5A6B-44B9-49A6-BE33-452EFE8AFF6E} = {1F99737D-07BC-4E8E-B998-F248D8C0CC0C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -85,5 +88,9 @@ Global
 		{92DD1271-7070-4E3D-B09D-B06716642FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92DD1271-7070-4E3D-B09D-B06716642FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92DD1271-7070-4E3D-B09D-B06716642FF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AD5A6B-44B9-49A6-BE33-452EFE8AFF6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AD5A6B-44B9-49A6-BE33-452EFE8AFF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AD5A6B-44B9-49A6-BE33-452EFE8AFF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AD5A6B-44B9-49A6-BE33-452EFE8AFF6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

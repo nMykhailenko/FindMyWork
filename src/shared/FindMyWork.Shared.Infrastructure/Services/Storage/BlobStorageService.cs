@@ -22,8 +22,8 @@ public class BlobStorageService : IBlobStorageService
         _blobContainerNameFactory = blobContainerNameFactory;
     }
 
-    public async Task<OneOf<SuccessFileResponse, ErrorResponse>> UploadAsync(
-        UploadFileRequest request,
+    public async Task<OneOf<SuccessBlobResponse, ErrorResponse>> UploadAsync(
+        UploadBlobRequest request,
         CancellationToken cancellationToken)
     {
         var containerName = _blobContainerNameFactory
@@ -32,8 +32,7 @@ public class BlobStorageService : IBlobStorageService
 
         var blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
 
-        var fileName = $"{Guid.NewGuid()}";
-        var blobClient = blobContainer.GetBlobClient(fileName);
+        var blobClient = blobContainer.GetBlobClient(request.File.FileName);
 
         var uploadedResult = await blobClient.UploadAsync(
             request.File.OpenReadStream(),
@@ -48,7 +47,7 @@ public class BlobStorageService : IBlobStorageService
 
         var blobSasBuilder = new BlobSasBuilder(BlobSasPermissions.Add, DateTimeOffset.UtcNow.AddMinutes(15));
         var sasToken = blobClient.GenerateSasUri(blobSasBuilder);
-        var response = new SuccessFileResponse(
+        var response = new SuccessBlobResponse(
             blobClient.Uri.AbsolutePath,
             "token");
         return response;
@@ -81,7 +80,7 @@ public class BlobStorageService : IBlobStorageService
         return memoryStream.ToArray();
     }
 
-    public async Task<OneOf<SuccessFileResponse, ErrorResponse>> GetFileAsync(
+    public async Task<OneOf<SuccessBlobResponse, ErrorResponse>> GetFileAsync(
         string fileName,
         DocumentType documentType,
         CancellationToken cancellationToken)
@@ -95,7 +94,7 @@ public class BlobStorageService : IBlobStorageService
 
         if (await blobClient.ExistsAsync(cancellationToken))
         {
-            return new SuccessFileResponse(blobClient.Uri.AbsolutePath, "token");
+            return new SuccessBlobResponse(blobClient.Uri.AbsolutePath, "token");
         }
 
         return new ErrorResponse(

@@ -61,7 +61,8 @@ internal class JobService : IJobService
                 var response = _mapper.Map<JobResponse>(addedJob);
 
                 return response;
-            }, entityNotValid => Task.FromResult<OneOf<JobResponse, EntityNotValid>>(entityNotValid));
+            }, 
+            entityNotValid => Task.FromResult<OneOf<JobResponse, EntityNotValid>>(entityNotValid));
     }
 
     public async Task<PaginatedResponse<IEnumerable<JobResponse>?>> GetByFilter(
