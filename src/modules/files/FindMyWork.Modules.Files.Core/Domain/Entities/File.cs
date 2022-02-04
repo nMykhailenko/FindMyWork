@@ -8,11 +8,9 @@ public class File
     public DocumentType Type { get; set; }
     public string Name { get; set; } = null!;
     
-    public Guid? CreatedByUserId { get; set; }
-    public UserType? CreatedByUserType { get; set; }
-    public bool? CreatedBySystem { get; set; }
-    public bool? CreatedByExternalUser { get; set; }
-    
+    public Guid CreatedByUserId { get; set; }
+    public UserType CreatedByUserType { get; set; }
+
     public bool? Deleted { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     public DateTimeOffset? UpdatedAt { get; set; }

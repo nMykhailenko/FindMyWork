@@ -6,4 +6,5 @@ namespace FindMyWork.Modules.Files.Core.Application.Common.Contracts.Database;
 public interface IFileRepository : IRepository
 {
     Task<File> AddAsync(File file, CancellationToken cancellationToken);
+    Task<File?> GetByIdAndUserIdAsync(Guid id, Guid userId, CancellationToken cancellationToken);
 }

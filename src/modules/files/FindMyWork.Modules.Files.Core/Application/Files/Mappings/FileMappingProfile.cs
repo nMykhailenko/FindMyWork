@@ -10,27 +10,19 @@ public class FileMappingProfile : Profile
 {
     public FileMappingProfile()
     {
-        CreateMap<(UploadFileRequest request, Guid? userId, UserType? userType), File>()
+        CreateMap<(UploadFileRequest request, Guid userId, UserType userType, string  fileName), File>()
             .ForMember(
                 dest => dest.Type,
                 options => options.MapFrom(src => src.request.Type))
             .ForMember(
                 dest => dest.Name,
-                options => options.MapFrom(src => src.request.File.FileName))
+                options => options.MapFrom(src => src.fileName))
             .ForMember(
                 dest => dest.CreatedByUserId,
                 options => options.MapFrom(src => src.userId))
             .ForMember(
                 dest => dest.CreatedByUserType,
-                options => options.MapFrom(src => src.userType))
-            .ForMember(
-                dest => dest.CreatedBySystem,
-                options
-                    => options.MapFrom(src => src.userId == null))
-            .ForMember(
-                dest => dest.CreatedByExternalUser,
-                options 
-                    => options.MapFrom(src => src.userId != null));
+                options => options.MapFrom(src => src.userType));
 
         CreateMap<(File file, string url), UploadFileResponse>()
             .ForMember(

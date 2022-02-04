@@ -32,7 +32,7 @@ public class BlobStorageService : IBlobStorageService
 
         var blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
 
-        var blobClient = blobContainer.GetBlobClient(request.File.FileName);
+        var blobClient = blobContainer.GetBlobClient(request.FileName);
 
         var uploadedResult = await blobClient.UploadAsync(
             request.File.OpenReadStream(),

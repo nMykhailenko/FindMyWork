@@ -23,9 +23,9 @@ internal class JobRepository : Repository, IJobRepository
 
     public async Task<Job> AddAsync(Job job, CancellationToken cancellationToken)
     {
-        await DbContext.Jobs.AddAsync(job, cancellationToken);
+        var addedJob = await DbContext.Jobs.AddAsync(job, cancellationToken);
         
-        return job;
+        return addedJob.Entity;
     }
 
     public async Task<IEnumerable<Job>> GetPaginatedByCategoryAsync(
