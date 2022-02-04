@@ -31,8 +31,8 @@ public class FileService : IFileService
 
     public async Task<OneOf<UploadFileResponse, ErrorResponse>> UploadFileAsync(
         UploadFileRequest request,
-        Guid? userId,
-        UserType? userType,
+        Guid userId,
+        UserType userType,
         CancellationToken cancellationToken)
     {
         var fileName = Guid.NewGuid().ToString();
