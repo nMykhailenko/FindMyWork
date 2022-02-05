@@ -22,7 +22,7 @@ public class FilesController : BaseController
     
     [HttpGet("{id:guid}")]
     [Produces("application/json")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UploadFileResponse))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessFileResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]   
     public async Task<IActionResult> GetFileAsync(
         [FromRoute]Guid id,
@@ -41,7 +41,7 @@ public class FilesController : BaseController
 
     [HttpPost]
     [Produces("application/json")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UploadFileResponse))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SuccessFileResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResponse))]   
     public async Task<IActionResult> UploadFileAsync(
         [FromForm] UploadFileRequest request,

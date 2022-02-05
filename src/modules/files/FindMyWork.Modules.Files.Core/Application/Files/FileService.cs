@@ -29,7 +29,7 @@ public class FileService : IFileService
         _fileRepository = fileRepository;
     }
 
-    public async Task<OneOf<UploadFileResponse, ErrorResponse>> UploadFileAsync(
+    public async Task<OneOf<SuccessFileResponse, ErrorResponse>> UploadFileAsync(
         UploadFileRequest request,
         Guid userId,
         UserType userType,
@@ -40,7 +40,7 @@ public class FileService : IFileService
         var blobResponse = await _blobStorageService
             .UploadAsync(uploadBlobRequest, cancellationToken);
         
-        return await blobResponse.Match<Task<OneOf<UploadFileResponse, ErrorResponse>>>(
+        return await blobResponse.Match<Task<OneOf<SuccessFileResponse, ErrorResponse>>>(
             async success =>
             {
                 var file = _mapper.Map<File>((request, userId, userType, fileName));
@@ -48,13 +48,13 @@ public class FileService : IFileService
                 var addedFile = await _fileRepository.AddAsync(file, cancellationToken);
                 await _fileRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
                 
-                var response = _mapper.Map<UploadFileResponse>((addedFile, success.Url));
+                var response = _mapper.Map<SuccessFileResponse>((addedFile, success.Url));
                 return response;
             },
-            error => Task.FromResult<OneOf<UploadFileResponse, ErrorResponse>>(error));
+            error => Task.FromResult<OneOf<SuccessFileResponse, ErrorResponse>>(error));
     }
 
-    public async Task<OneOf<SuccessBlobResponse, EntityNotFound,  ErrorResponse>> GetFileAsync(
+    public async Task<OneOf<SuccessFileResponse, EntityNotFound,  ErrorResponse>> GetFileAsync(
         Guid id,
         Guid userId, 
         CancellationToken cancellationToken)
@@ -71,7 +71,11 @@ public class FileService : IFileService
             cancellationToken);
 
         return await blobResponse.Match(
-            success => Task.FromResult<OneOf<SuccessBlobResponse, EntityNotFound, ErrorResponse>>(success),
-            error => Task.FromResult<OneOf<SuccessBlobResponse, EntityNotFound, ErrorResponse>>(error));
+            success =>
+            {
+                var response = _mapper.Map<SuccessFileResponse>((file, success.Url));
+                return Task.FromResult<OneOf<SuccessFileResponse, EntityNotFound, ErrorResponse>>(response);
+            },
+            error => Task.FromResult<OneOf<SuccessFileResponse, EntityNotFound, ErrorResponse>>(error));
     }
 }

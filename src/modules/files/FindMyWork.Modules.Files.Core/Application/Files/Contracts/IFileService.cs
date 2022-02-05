@@ -9,13 +9,13 @@ namespace FindMyWork.Modules.Files.Core.Application.Files.Contracts;
 
 public interface IFileService
 {
-    Task<OneOf<UploadFileResponse, ErrorResponse>> UploadFileAsync(
+    Task<OneOf<SuccessFileResponse, ErrorResponse>> UploadFileAsync(
         UploadFileRequest request,
         Guid userId,
         UserType userType,
         CancellationToken cancellationToken);
 
-    Task<OneOf<SuccessBlobResponse, EntityNotFound, ErrorResponse>> GetFileAsync(
+    Task<OneOf<SuccessFileResponse, EntityNotFound, ErrorResponse>> GetFileAsync(
         Guid id,
         Guid userId,
         CancellationToken cancellationToken);

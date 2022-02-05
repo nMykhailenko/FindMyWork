@@ -2,7 +2,7 @@
 
 namespace FindMyWork.Modules.Files.Core.Application.Files.Models.ResponseModels;
 
-public record UploadFileResponse(
+public record SuccessFileResponse(
     Guid Id,
     DocumentType Type,
     string FileName,

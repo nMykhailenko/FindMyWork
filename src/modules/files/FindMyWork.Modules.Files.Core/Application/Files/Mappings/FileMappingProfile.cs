@@ -25,7 +25,7 @@ public class FileMappingProfile : Profile
                 dest => dest.CreatedByUserType,
                 options => options.MapFrom(src => src.userType));
 
-        CreateMap<(File file, string url), UploadFileResponse>()
+        CreateMap<(File file, string url), SuccessFileResponse>()
             .MapRecordMember(
                 dest => dest.Id,
                 src => src.file.Id)

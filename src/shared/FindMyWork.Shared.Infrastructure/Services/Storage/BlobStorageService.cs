@@ -86,7 +86,7 @@ public class BlobStorageService : IBlobStorageService
             .Create(documentType)
             .Get();
 
-        var blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
+        var blobContainer = await GetOrCreateContainerAsync(containerName, cancellationToken);
         var blobClient = blobContainer.GetBlobClient(fileName);
 
         if (await blobClient.ExistsAsync(cancellationToken))
