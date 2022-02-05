@@ -45,7 +45,7 @@ public class FileService : IFileService
             {
                 var file = _mapper.Map<File>((request, userId, userType, fileName));
                 
-                var addedFile = _fileRepository.AddAsync(file, cancellationToken);
+                var addedFile = await _fileRepository.AddAsync(file, cancellationToken);
                 await _fileRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
                 
                 var response = _mapper.Map<UploadFileResponse>((addedFile, success.Url));

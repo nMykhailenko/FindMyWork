@@ -2,6 +2,7 @@
 using FindMyWork.Modules.Files.Core.Application.Files.Models.RequestModels;
 using FindMyWork.Modules.Files.Core.Application.Files.Models.ResponseModels;
 using FindMyWork.Shared.Application.Enums;
+using FindMyWork.Shared.Infrastructure.Extensions;
 using File = FindMyWork.Modules.Files.Core.Domain.Entities.File;
 
 namespace FindMyWork.Modules.Files.Core.Application.Files.Mappings;
@@ -25,17 +26,17 @@ public class FileMappingProfile : Profile
                 options => options.MapFrom(src => src.userType));
 
         CreateMap<(File file, string url), UploadFileResponse>()
-            .ForMember(
+            .MapRecordMember(
                 dest => dest.Id,
-                options => options.MapFrom(src => src.file.Id))
-            .ForMember(
+                src => src.file.Id)
+            .MapRecordMember(
                 dest => dest.Type,
-                options => options.MapFrom(src => src.file.Type))
-            .ForMember(
+                src => src.file.Type)
+            .MapRecordMember(
                 dest => dest.FileName,
-                options => options.MapFrom(src => src.file.Name))
-            .ForMember(
+                src => src.file.Name)
+            .MapRecordMember(
                 dest => dest.Url,
-                options => options.MapFrom(src => src.url));
+                src => src.url);
     }
 }

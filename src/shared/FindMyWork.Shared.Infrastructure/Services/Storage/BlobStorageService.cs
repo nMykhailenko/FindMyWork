@@ -1,10 +1,11 @@
 ﻿using Azure.Storage.Blobs;
-using Azure.Storage.Sas;
+using Azure.Storage.Blobs.Models;
 using FindMyWork.Shared.Application.Contracts;
 using FindMyWork.Shared.Application.Enums;
 using FindMyWork.Shared.Application.Models.RequestModels;
 using FindMyWork.Shared.Application.Models.ResponseModels;
 using FindMyWork.Shared.Infrastructure.Services.Storage.Factory;
+using Microsoft.AspNetCore.Http;
 using OneOf;
 
 namespace FindMyWork.Shared.Infrastructure.Services.Storage;
@@ -30,26 +31,22 @@ public class BlobStorageService : IBlobStorageService
             .Create(request.Type)
             .Get();
 
-        var blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
+        var blobContainer = await GetOrCreateContainerAsync(containerName, cancellationToken);
 
         var blobClient = blobContainer.GetBlobClient(request.FileName);
 
         var uploadedResult = await blobClient.UploadAsync(
             request.File.OpenReadStream(),
             cancellationToken);
-
-        if (uploadedResult is null)
+        var uploadResponse = uploadedResult.GetRawResponse();
+        if (uploadResponse.Status != StatusCodes.Status201Created)
         {
             return new ErrorResponse("UploadingFileIssue",
                 $"Error during uploading file with name: {request.File.FileName} " +
                 $"and document type: {request.Type}");
         }
-
-        var blobSasBuilder = new BlobSasBuilder(BlobSasPermissions.Add, DateTimeOffset.UtcNow.AddMinutes(15));
-        var sasToken = blobClient.GenerateSasUri(blobSasBuilder);
-        var response = new SuccessBlobResponse(
-            blobClient.Uri.AbsolutePath,
-            "token");
+        
+        var response = new SuccessBlobResponse(blobClient.Uri.AbsoluteUri);
         return response;
     }
 
@@ -94,12 +91,26 @@ public class BlobStorageService : IBlobStorageService
 
         if (await blobClient.ExistsAsync(cancellationToken))
         {
-            return new SuccessBlobResponse(blobClient.Uri.AbsolutePath, "token");
+            return new SuccessBlobResponse(blobClient.Uri.AbsoluteUri);
         }
 
         return new ErrorResponse(
             "RetrieveBlobIssue",
             $"Cannot get blob with name: {fileName} " +
             $"from container {containerName}");
+    }
+
+    private async Task<BlobContainerClient> GetOrCreateContainerAsync(
+        string containerName, 
+        CancellationToken cancellationToken)
+    {
+        var blobContainer = _blobServiceClient.GetBlobContainerClient(containerName);
+        if (await blobContainer.ExistsAsync(cancellationToken))
+        {
+            return blobContainer;
+        }
+
+        await blobContainer.CreateAsync(PublicAccessType.None, cancellationToken: cancellationToken);
+        return blobContainer;
     }
 }
