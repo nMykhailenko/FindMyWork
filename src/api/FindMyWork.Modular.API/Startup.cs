@@ -9,7 +9,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddSharedInfrastructure();
-        services.AddJobsModule();
+        //services.AddJobsModule();
         services.AddFilesModule();
     }
 
@@ -19,7 +19,7 @@ public class Startup
         
         app.UseRouting();
         
-        app.UseJobsModule();
+        //app.UseJobsModule();
         app.UseFilesModule();
 
         app.UseEndpoints(endpoints =>
