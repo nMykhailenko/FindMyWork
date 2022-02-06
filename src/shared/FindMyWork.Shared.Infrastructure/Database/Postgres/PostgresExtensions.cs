@@ -28,4 +28,22 @@ public static class PostgresExtensions
 
         return services;
     }
+    
+    public static IServiceCollection AddIdentityPostgres<T>(
+        this IServiceCollection services,
+        string sectionName) where T : BaseDbContext
+    {
+        var options = services.GetOptions<PostgresOptions>(sectionName);
+        services.AddDbContext<T>(dbOptions =>
+        {
+            dbOptions.UseNpgsql(options.ConnectionString);
+            dbOptions.UseOpenIddict();
+        });
+
+        using var scope = services.BuildServiceProvider().CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<T>();
+        dbContext.Database.Migrate();
+
+        return services;
+    }
 }
