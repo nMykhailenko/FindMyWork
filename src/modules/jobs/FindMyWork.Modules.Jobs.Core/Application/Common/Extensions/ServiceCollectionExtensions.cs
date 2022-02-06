@@ -30,11 +30,11 @@ internal static class ServiceCollectionExtensions
         services.AddScoped<IPaginationHelper, PaginationHelper>();
         
         
-        services.AddPostgres<ApplicationDbContext>(JobDbOptionsSectionName);
+        services.AddPostgres<JobsDbContext>(JobDbOptionsSectionName);
 
         services.AddFluentValidation(fv =>
         {
-            fv.RegisterValidatorsFromAssemblyContaining<ApplicationDbContext>();
+            fv.RegisterValidatorsFromAssemblyContaining<JobsDbContext>();
             fv.DisableDataAnnotationsValidation = true;
         });
         

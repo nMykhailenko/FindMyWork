@@ -10,7 +10,7 @@ public class User
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
     public string Mobile { get; set; } = null!;
-    
+    public string LocaleId { get; set; } = null!;
     public bool Verified { get; set; }
     public UserType Type { get; set; }
     

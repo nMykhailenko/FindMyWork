@@ -23,7 +23,7 @@ internal static class ServiceCollectionExtensions
         services.AddScoped<IFileRepository, FileRepository>();
         services.AddScoped<IFileService, FileService>();
         
-        services.AddPostgres<ApplicationDbContext>(FileDbOptionsSectionName);
+        services.AddPostgres<FilesDbContext>(FileDbOptionsSectionName);
 
         // services.AddFluentValidation(fv =>
         // {

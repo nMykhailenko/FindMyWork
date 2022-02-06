@@ -7,9 +7,9 @@ namespace FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence.Repositories;
 
 internal class JobRepository : Repository, IJobRepository
 {
-    private ApplicationDbContext DbContext => (UnitOfWork as ApplicationDbContext)!;
+    private JobsDbContext DbContext => (UnitOfWork as JobsDbContext)!;
     
-    public JobRepository(ApplicationDbContext dbContext) : base(dbContext)
+    public JobRepository(JobsDbContext dbContext) : base(dbContext)
     {
     }
 

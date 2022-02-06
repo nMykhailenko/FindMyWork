@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FindMyWork.Modules.Files.Core.Infrastructure.Persistence.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(FilesDbContext))]
     [Migration("20220205041843_initial")]
     partial class initial
     {

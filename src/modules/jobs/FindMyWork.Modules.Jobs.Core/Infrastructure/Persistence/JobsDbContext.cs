@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FindMyWork.Modules.Jobs.Core.Infrastructure.Persistence;
 
-internal class ApplicationDbContext : BaseDbContext
+internal class JobsDbContext : BaseDbContext
 {
-    public ApplicationDbContext(DbContextOptions options) : base(options)
+    public JobsDbContext(DbContextOptions<JobsDbContext> options) : base(options)
     {
     }
     

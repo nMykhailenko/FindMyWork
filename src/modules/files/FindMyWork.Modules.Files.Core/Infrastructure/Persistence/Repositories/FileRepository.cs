@@ -7,9 +7,9 @@ namespace FindMyWork.Modules.Files.Core.Infrastructure.Persistence.Repositories;
 
 internal class FileRepository : Repository, IFileRepository
 {
-    private ApplicationDbContext DbContext => (UnitOfWork as ApplicationDbContext)!;
+    private FilesDbContext DbContext => (UnitOfWork as FilesDbContext)!;
 
-    public FileRepository(ApplicationDbContext dbContext) : base(dbContext)
+    public FileRepository(FilesDbContext dbContext) : base(dbContext)
     {
     }
 

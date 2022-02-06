@@ -6,6 +6,7 @@ public class Document
 {
     public Guid Id { get; set; }
     public string Url { get; set; } = null!;
+    public Guid FileRefId { get; set; }
     public DocumentType Type { get; set; }
 
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;

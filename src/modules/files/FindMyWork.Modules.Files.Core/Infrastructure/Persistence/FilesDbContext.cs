@@ -4,9 +4,9 @@ using File = FindMyWork.Modules.Files.Core.Domain.Entities.File;
 
 namespace FindMyWork.Modules.Files.Core.Infrastructure.Persistence;
 
-internal class ApplicationDbContext : BaseDbContext
+internal class FilesDbContext : BaseDbContext
 {
-    public ApplicationDbContext(DbContextOptions options) : base(options)
+    public FilesDbContext(DbContextOptions<FilesDbContext> options) : base(options)
     {
     }
     
