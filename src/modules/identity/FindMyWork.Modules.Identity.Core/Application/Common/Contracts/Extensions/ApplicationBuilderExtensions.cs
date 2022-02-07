@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Builder;
 
+[assembly:InternalsVisibleTo("FindMyWork.Modules.Identity.Api")]
 namespace FindMyWork.Modules.Users.Core.Application.Common.Contracts.Extensions;
 
-public static class ApplicationBuilderExtensions
+internal static class ApplicationBuilderExtensions
 {
     public static IApplicationBuilder UseOpenIdDict(this IApplicationBuilder app)
     {

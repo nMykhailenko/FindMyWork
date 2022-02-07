@@ -1,4 +1,4 @@
-﻿using FindMyWork.Modules.Users.Core.Application.Common.Contracts.Database;
+﻿using System.Runtime.CompilerServices;
 using FindMyWork.Modules.Users.Core.Application.Users;
 using FindMyWork.Modules.Users.Core.Domain.Entities;
 using FindMyWork.Modules.Users.Core.Infrastructure.Persistence;
@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Abstractions;
 
+[assembly:InternalsVisibleTo("FindMyWork.Modules.Identity.Api")]
 namespace FindMyWork.Modules.Users.Core.Application.Common.Contracts.Extensions;
 
 internal static class ServiceCollectionExtensions
@@ -28,6 +29,7 @@ internal static class ServiceCollectionExtensions
         .AddServer(options =>
         {
             // Enable the required endpoints
+            options.SetAuthorizationEndpointUris("/connect/authorize");
             options.SetTokenEndpointUris("/connect/token");
             options.SetUserinfoEndpointUris("/connect/userinfo");
 
@@ -49,7 +51,9 @@ internal static class ServiceCollectionExtensions
             options.AddDevelopmentEncryptionCertificate()
                 .AddDevelopmentSigningCertificate();
 
-            options.UseAspNetCore().EnableTokenEndpointPassthrough();
+            options.UseAspNetCore()
+                .EnableTokenEndpointPassthrough()
+                .EnableAuthorizationEndpointPassthrough();
         })
         .AddValidation(options =>
         {
