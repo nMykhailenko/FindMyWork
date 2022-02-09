@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\modules\files\FindMyWork.Modules.Files.Api\FindMyWork.Modules.Files.Api.csproj" />
-      <ProjectReference Include="..\..\modules\identity\FindMyWork.Modules.Identity.Api\FindMyWork.Modules.Identity.Api.csproj" />
+      <ProjectReference Include="..\..\modules\identity\FindMyWork.Modules.Identity.Web\FindMyWork.Modules.Identity.Web.csproj" />
       <ProjectReference Include="..\..\modules\jobs\FIndMyWork.Modules.Jobs.Api\FIndMyWork.Modules.Jobs.Api.csproj" />
       <ProjectReference Include="..\..\shared\FindMyWork.Shared.Infrastructure\FindMyWork.Shared.Infrastructure.csproj" />
     </ItemGroup>
@@ -19,6 +19,10 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="Views\Account\Login.cshtml" />
     </ItemGroup>
 
 </Project>

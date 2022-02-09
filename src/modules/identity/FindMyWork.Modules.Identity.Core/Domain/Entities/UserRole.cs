@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace FindMyWork.Modules.Users.Core.Domain.Entities;
+﻿namespace FindMyWork.Modules.Identity.Core.Domain.Entities;
 
 public class UserRole
 {

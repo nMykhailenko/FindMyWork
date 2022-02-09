@@ -1,3 +1,3 @@
-﻿namespace FindMyWork.Modules.Users.Core.Application.Documents.Models.ResponseModels;
+﻿namespace FindMyWork.Modules.Identity.Core.Application.Documents.Models.ResponseModels;
 
 public record AcceptedDocumentResponse();

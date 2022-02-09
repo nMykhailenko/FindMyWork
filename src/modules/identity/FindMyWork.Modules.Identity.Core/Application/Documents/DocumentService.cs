@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using OneOf;
-using FindMyWork.Modules.Users.Core.Application.Common.Contracts.Database;
-using FindMyWork.Modules.Users.Core.Application.Documents.Contracts;
-using FindMyWork.Modules.Users.Core.Application.Documents.Models.RequestModels;
-using FindMyWork.Modules.Users.Core.Application.Documents.Models.ResponseModels;
-using FindMyWork.Modules.Users.Core.Domain.Entities;
+using FindMyWork.Modules.Identity.Core.Application.Common.Contracts.Database;
+using FindMyWork.Modules.Identity.Core.Application.Documents.Contracts;
+using FindMyWork.Modules.Identity.Core.Application.Documents.Models.RequestModels;
+using FindMyWork.Modules.Identity.Core.Application.Documents.Models.ResponseModels;
+using FindMyWork.Modules.Identity.Core.Domain.Entities;
 using FindMyWork.Shared.Application.Models.ErrorModels;
+using OneOf;
 
-namespace FindMyWork.Modules.Users.Core.Application.Documents;
+namespace FindMyWork.Modules.Identity.Core.Application.Documents;
 
 public class DocumentService : IDocumentService
 {

@@ -1,10 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
-using FindMyWork.Modules.Users.Core.Application.Common.Contracts.Extensions;
+using FindMyWork.Modules.Identity.Core.Application.Common.Contracts.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly:InternalsVisibleTo("FindMyWork.Modular.API")]
-namespace FindMyWork.Modules.Users.Api;
+namespace FindMyWork.Modules.Identity.Web;
 
 internal static class IdentityModule
 {
@@ -20,7 +20,7 @@ internal static class IdentityModule
     public static IApplicationBuilder UseIdentityModule(this IApplicationBuilder app)
     {
         app.UseOpenIdDict();
-        
+
         return app;
     }
 }

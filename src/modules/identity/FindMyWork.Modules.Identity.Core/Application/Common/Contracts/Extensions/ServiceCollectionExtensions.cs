@@ -1,14 +1,15 @@
 ﻿using System.Runtime.CompilerServices;
-using FindMyWork.Modules.Users.Core.Application.Users;
-using FindMyWork.Modules.Users.Core.Domain.Entities;
-using FindMyWork.Modules.Users.Core.Infrastructure.Persistence;
+using FindMyWork.Modules.Identity.Core.Application.Users;
+using FindMyWork.Modules.Identity.Core.Domain.Entities;
+using FindMyWork.Modules.Identity.Core.Infrastructure.Persistence;
 using FindMyWork.Shared.Infrastructure.Database.Postgres;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Abstractions;
 
-[assembly:InternalsVisibleTo("FindMyWork.Modules.Identity.Api")]
-namespace FindMyWork.Modules.Users.Core.Application.Common.Contracts.Extensions;
+[assembly:InternalsVisibleTo("FindMyWork.Modules.Identity.Web")]
+namespace FindMyWork.Modules.Identity.Core.Application.Common.Contracts.Extensions;
 
 internal static class ServiceCollectionExtensions
 {
@@ -16,6 +17,8 @@ internal static class ServiceCollectionExtensions
     
     public static IServiceCollection AddCore(this IServiceCollection services)
     {
+        services.AddControllersWithViews();
+        
         services.AddIdentityPostgres<IdentityDbContext>(IdentityDbOptionsSectionName);
         services.Configure<IdentityOptions>(options =>
         {
@@ -25,41 +28,41 @@ internal static class ServiceCollectionExtensions
         });
         
         services.AddOpenIddict()
-        .AddCore(options => options.UseEntityFrameworkCore().UseDbContext<IdentityDbContext>())
-        .AddServer(options =>
-        {
-            // Enable the required endpoints
-            options.SetAuthorizationEndpointUris("/connect/authorize");
-            options.SetTokenEndpointUris("/connect/token");
-            options.SetUserinfoEndpointUris("/connect/userinfo");
+            .AddCore(options => options.UseEntityFrameworkCore().UseDbContext<IdentityDbContext>())
+            .AddServer(options =>
+            {
+                // Enable the required endpoints
+                options.SetAuthorizationEndpointUris("/connect/authorize");
+                options.SetTokenEndpointUris("/connect/token");
+                options.SetUserinfoEndpointUris("/connect/userinfo");
 
-            options.AllowPasswordFlow();
-            options.AllowRefreshTokenFlow();
-            options.AllowAuthorizationCodeFlow();
-            options.AllowClientCredentialsFlow();
-            
-            options.UseReferenceAccessTokens();
-            options.UseReferenceRefreshTokens();
-            
-            options.RegisterScopes(OpenIddictConstants.Permissions.Scopes.Email,
-                            OpenIddictConstants.Permissions.Scopes.Profile,
-                            OpenIddictConstants.Permissions.Scopes.Roles);
+                options.AllowPasswordFlow();
+                options.AllowRefreshTokenFlow();
+                options.AllowAuthorizationCodeFlow().RequireProofKeyForCodeExchange();
+                options.AllowClientCredentialsFlow();
+                
+                options.UseReferenceAccessTokens();
+                options.UseReferenceRefreshTokens();
+                
+                options.RegisterScopes(OpenIddictConstants.Permissions.Scopes.Email,
+                                OpenIddictConstants.Permissions.Scopes.Profile,
+                                OpenIddictConstants.Permissions.Scopes.Roles);
 
-            options.SetAccessTokenLifetime(TimeSpan.FromMinutes(60));
-            options.SetRefreshTokenLifetime(TimeSpan.FromDays(7));
+                options.SetAccessTokenLifetime(TimeSpan.FromMinutes(60));
+                options.SetRefreshTokenLifetime(TimeSpan.FromDays(7));
 
-            options.AddDevelopmentEncryptionCertificate()
-                .AddDevelopmentSigningCertificate();
+                options.AddDevelopmentEncryptionCertificate()
+                    .AddDevelopmentSigningCertificate();
 
-            options.UseAspNetCore()
-                .EnableTokenEndpointPassthrough()
-                .EnableAuthorizationEndpointPassthrough();
-        })
-        .AddValidation(options =>
-        {
-            options.UseLocalServer();
-            options.UseAspNetCore();
-        });
+                options.UseAspNetCore()
+                    .EnableTokenEndpointPassthrough()
+                    .EnableAuthorizationEndpointPassthrough();
+            })
+            .AddValidation(options =>
+            {
+                options.UseLocalServer();
+                options.UseAspNetCore();
+            });
 
         services.AddAuthentication(options =>
         {
@@ -72,6 +75,12 @@ internal static class ServiceCollectionExtensions
             .AddUserStore<UserStore>()
             .AddRoleStore<RoleStore>()
             .AddUserManager<UserManager<User>>();
+        
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+                options.LoginPath = "/account/login";
+            });
         
         return services;
     }

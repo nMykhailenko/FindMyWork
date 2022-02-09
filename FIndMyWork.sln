@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{83624C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{5EA7EF88-BD62-423E-A870-B3A214F45D1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Identity.Api", "src\modules\identity\FindMyWork.Modules.Identity.Api\FindMyWork.Modules.Identity.Api.csproj", "{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Identity.Web", "src\modules\identity\FindMyWork.Modules.Identity.Web\FindMyWork.Modules.Identity.Web.csproj", "{39AA8AC1-FAD9-4FCE-B75E-9C127446FA5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindMyWork.Modules.Identity.Core", "src\modules\identity\FindMyWork.Modules.Identity.Core\FindMyWork.Modules.Identity.Core.csproj", "{5E9A1002-C763-4245-8C7B-A97860C6CFAE}"
 EndProject

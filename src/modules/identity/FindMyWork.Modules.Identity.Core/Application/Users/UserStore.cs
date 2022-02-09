@@ -1,9 +1,9 @@
-﻿using FindMyWork.Modules.Users.Core.Domain.Entities;
-using FindMyWork.Modules.Users.Core.Infrastructure.Persistence;
+﻿using FindMyWork.Modules.Identity.Core.Domain.Entities;
+using FindMyWork.Modules.Identity.Core.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace FindMyWork.Modules.Users.Core.Application.Users;
+namespace FindMyWork.Modules.Identity.Core.Application.Users;
 
  public class UserStore : IUserPasswordStore<User>, IUserRoleStore<User>
 {

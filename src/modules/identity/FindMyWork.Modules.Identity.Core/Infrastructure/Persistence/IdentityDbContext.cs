@@ -1,8 +1,8 @@
-﻿using FindMyWork.Modules.Users.Core.Domain.Entities;
+﻿using FindMyWork.Modules.Identity.Core.Domain.Entities;
 using FindMyWork.Shared.Infrastructure.Database.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace FindMyWork.Modules.Users.Core.Infrastructure.Persistence;
+namespace FindMyWork.Modules.Identity.Core.Infrastructure.Persistence;
 
 public class IdentityDbContext : BaseDbContext
 {

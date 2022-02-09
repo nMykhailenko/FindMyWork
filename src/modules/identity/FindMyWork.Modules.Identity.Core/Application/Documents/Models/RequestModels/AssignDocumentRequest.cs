@@ -1,6 +1,6 @@
 ﻿using FindMyWork.Shared.Application.Enums;
 
-namespace FindMyWork.Modules.Users.Core.Application.Documents.Models.RequestModels;
+namespace FindMyWork.Modules.Identity.Core.Application.Documents.Models.RequestModels;
 
 public record AssignDocumentRequest
 {

@@ -1,7 +1,7 @@
-﻿using FindMyWork.Modules.Users.Core.Domain.Entities;
+﻿using FindMyWork.Modules.Identity.Core.Domain.Entities;
 using FindMyWork.Shared.Infrastructure.Database.Repositories;
 
-namespace FindMyWork.Modules.Users.Core.Application.Common.Contracts.Database;
+namespace FindMyWork.Modules.Identity.Core.Application.Common.Contracts.Database;
 
 public interface IDocumentRepository : IRepository
 {

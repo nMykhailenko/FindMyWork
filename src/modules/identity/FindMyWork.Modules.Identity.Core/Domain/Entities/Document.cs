@@ -1,6 +1,6 @@
 ﻿using FindMyWork.Shared.Application.Enums;
 
-namespace FindMyWork.Modules.Users.Core.Domain.Entities;
+namespace FindMyWork.Modules.Identity.Core.Domain.Entities;
 
 public class Document
 {

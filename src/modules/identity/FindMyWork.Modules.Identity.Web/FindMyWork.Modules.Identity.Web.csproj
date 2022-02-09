@@ -4,7 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>FindMyWork.Modules.Users.Api</RootNamespace>
+        <RootNamespace>FindMyWork.Modules.Identity.Web</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

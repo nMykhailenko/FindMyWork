@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using FindMyWork.Modules.Users.Core.Application.Documents.Models.RequestModels;
-using FindMyWork.Modules.Users.Core.Domain.Entities;
+using FindMyWork.Modules.Identity.Core.Application.Documents.Models.RequestModels;
+using FindMyWork.Modules.Identity.Core.Domain.Entities;
 
-namespace FindMyWork.Modules.Users.Core.Application.Documents.Mappings;
+namespace FindMyWork.Modules.Identity.Core.Application.Documents.Mappings;
 
 public class DocumentMappingProfile : Profile
 {

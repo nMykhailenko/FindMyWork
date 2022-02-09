@@ -1,7 +1,7 @@
-﻿using FindMyWork.Modules.Users.Core.Domain.Entities;
+﻿using FindMyWork.Modules.Identity.Core.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
-namespace FindMyWork.Modules.Users.Core.Application.Users;
+namespace FindMyWork.Modules.Identity.Core.Application.Users;
 
 public class RoleStore : IRoleStore<Role>
 {

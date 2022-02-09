@@ -1,6 +1,6 @@
 ﻿using FindMyWork.Modules.Files.Api;
+using FindMyWork.Modules.Identity.Web;
 using FIndMyWork.Modules.Jobs.Api;
-using FindMyWork.Modules.Users.Api;
 using FindMyWork.Shared.Infrastructure.Extensions;
 
 namespace FindMyWork.Modular.API;
