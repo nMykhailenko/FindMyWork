@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using OpenIddict.Abstractions;
 
-[assembly:InternalsVisibleTo("FindMyWork.Modules.Identity.Web")]
+[assembly:InternalsVisibleTo("FindMyWork.Modular.Identity.Web")]
 namespace FindMyWork.Modules.Identity.Core.Application.Common.Contracts.Extensions;
 
 internal static class ServiceCollectionExtensions

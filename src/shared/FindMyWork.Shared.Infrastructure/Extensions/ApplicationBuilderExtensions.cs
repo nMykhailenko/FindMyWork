@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 
 
 [assembly:InternalsVisibleTo("FindMyWork.Modular.API")]
+[assembly:InternalsVisibleTo("FindMyWork.Modular.Identity.Web")]
 namespace FindMyWork.Shared.Infrastructure.Extensions;
 
 internal static class ApplicationBuilderExtensions

@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 
 [assembly:InternalsVisibleTo("FindMyWork.Modular.API")]
+[assembly:InternalsVisibleTo("FindMyWork.Modular.Identity.Web")]
 namespace FindMyWork.Shared.Infrastructure.Extensions;
 
 internal static class ServiceCollectionExtensions

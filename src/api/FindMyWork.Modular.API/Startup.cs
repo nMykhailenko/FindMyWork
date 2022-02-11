@@ -12,7 +12,6 @@ public class Startup
         services.AddSharedInfrastructure();
         services.AddJobsModule();
         services.AddFilesModule();
-        services.AddIdentityModule();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -23,7 +22,6 @@ public class Startup
         
         app.UseJobsModule();
         app.UseFilesModule();
-        app.UseIdentityModule();
 
         app.UseEndpoints(endpoints =>
         {
