@@ -1,7 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
+using FindMyWork.Modules.Identity.Core.Application.Common.Contracts.Database;
 using FindMyWork.Modules.Identity.Core.Application.Users;
 using FindMyWork.Modules.Identity.Core.Domain.Entities;
 using FindMyWork.Modules.Identity.Core.Infrastructure.Persistence;
+using FindMyWork.Modules.Identity.Core.Infrastructure.Repositories;
 using FindMyWork.Shared.Infrastructure.Database.Postgres;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -81,6 +83,8 @@ internal static class ServiceCollectionExtensions
             {
                 options.LoginPath = "/account/login";
             });
+
+        services.AddScoped<IDocumentRepository, DocumentRepository>();
         
         return services;
     }

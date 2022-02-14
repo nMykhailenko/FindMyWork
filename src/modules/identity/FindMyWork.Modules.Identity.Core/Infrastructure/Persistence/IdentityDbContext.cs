@@ -6,9 +6,12 @@ namespace FindMyWork.Modules.Identity.Core.Infrastructure.Persistence;
 
 public class IdentityDbContext : BaseDbContext
 {
-    public IdentityDbContext(DbContextOptions<IdentityDbContext> options) : base(options)
+    public IdentityDbContext(DbContextOptions<IdentityDbContext> options) 
+        : base(options)
     {
     }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Document> Documents { get; set; }
+    public DbSet<AcceptedDocument> AcceptedDocuments { get; set; }
 }

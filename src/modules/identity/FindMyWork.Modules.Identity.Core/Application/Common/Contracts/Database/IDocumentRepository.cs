@@ -5,7 +5,7 @@ namespace FindMyWork.Modules.Identity.Core.Application.Common.Contracts.Database
 
 public interface IDocumentRepository : IRepository
 {
-    Task<Document> AddAsync(Document job, CancellationToken cancellationToken);
+    Task<Document> AddAsync(Document document, CancellationToken cancellationToken);
     Task<AcceptedDocument?> GetAcceptedDocument(Guid documentId, CancellationToken cancellationToken);
 
 }
