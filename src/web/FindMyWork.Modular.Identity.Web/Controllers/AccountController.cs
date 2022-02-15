@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace FindMyWork.Modular.Identity.Web.Controllers;
 
 [ApiExplorerSettings(IgnoreApi = true)]
-[Route("/account")]
+[Route("[controller]/[action]")]
 public class AccountController : Controller
 {
-    [HttpGet("login")]
+    [HttpGet]
     [AllowAnonymous]
     public IActionResult Login(string? returnUrl = null)
     {
@@ -19,10 +19,9 @@ public class AccountController : Controller
         return View("Login");
     }
 
-    [HttpPost("login")]
+    [HttpPost]
     [AllowAnonymous]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    public async Task<IActionResult> Login([Bind("Username,Password,ReturnUrl")]LoginViewModel model)
     {
         ViewData["ReturnUrl"] = model.ReturnUrl;
 

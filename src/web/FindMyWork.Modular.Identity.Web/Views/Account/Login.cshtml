@@ -1,11 +1,11 @@
 ﻿@model FindMyWork.Modular.Identity.Web.ViewModels.Account.LoginViewModel
-<form autocomplete="off" asp-route="login" asp-controller="account">
+<form autocomplete="off" method="post" asp-action="Login" asp-controller="Account">
     <input type="hidden" asp-for="ReturnUrl"/>
     <div class="card">
-        <input type="text" class="form-control form-control-lg" placeholder="Username" asp-for="Username" autofocus>
-        <input type="password" class="form-control form-control-lg form-control-last" placeholder="Password" asp-for="Password">
+        <input type="text" class="form-control form-control-lg" placeholder="Username" name="Username" autofocus>
+        <input type="password" class="form-control form-control-lg form-control-last" placeholder="Password" name="Password">
     </div>
     <p>
-        <button type="submit" class="btn btn-dark btn-block mt-3">Login</button>
+        <button type="submit" name="submit" formmethod="post" class="btn btn-dark btn-block mt-3">Login</button>
     </p>
 </form>

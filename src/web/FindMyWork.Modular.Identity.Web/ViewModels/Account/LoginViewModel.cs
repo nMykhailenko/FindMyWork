@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace FindMyWork.Modular.Identity.Web.ViewModels.Account;
 
-public record LoginViewModel
+public class LoginViewModel
 {
-    [Required]
+    [BindRequired]
     public string Username { get; set; } = null!;
 
-    [Required]
+    [BindRequired]
     public string Password { get; set; } = null!;
 
     public string ReturnUrl { get; set; } = null!;
