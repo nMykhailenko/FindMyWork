@@ -10,7 +10,8 @@ public class DocumentRepository : Repository, IDocumentRepository
 {
     private IdentityDbContext DbContext => (UnitOfWork as IdentityDbContext)!;
 
-    public DocumentRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+    public DocumentRepository(IdentityDbContext identityDbContext) 
+        : base(identityDbContext)
     {
     }
 

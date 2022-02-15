@@ -27,8 +27,8 @@ app.UseRouting();
 
 app.UseOpenIdDict();
 
-app.UseAuthorization();
-
+app.MapControllers();
 app.MapRazorPages();
+app.MapDefaultControllerRoute();
 
 app.Run();

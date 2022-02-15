@@ -8,16 +8,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Pages\Account\Login.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\modules\identity\FindMyWork.Modules.Identity.Core\FindMyWork.Modules.Identity.Core.csproj" />
       <ProjectReference Include="..\..\shared\FindMyWork.Shared.Infrastructure\FindMyWork.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="OpenIddict.Server.AspNetCore" Version="3.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views" />
     </ItemGroup>
 
 </Project>
